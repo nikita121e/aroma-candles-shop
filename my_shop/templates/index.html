@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Aroma Home — Irish Handmade Soy Candles</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+
+        :root {
+            --primary-brown: #4e342e;
+            --secondary-brown: #6d4c41;
+            --soft-bg: #fcf9f7;
+            --glass-white: rgba(255, 255, 255, 0.85);
+        }
+
+        body { 
+            background-color: var(--soft-bg); 
+            color: var(--primary-brown); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+
+        .navbar {
+            background: var(--glass-white) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(78, 52, 46, 0.1);
+            padding: 1.2rem 0;
+            z-index: 1050;
+        }
+
+        .navbar-brand { 
+            font-weight: 800; 
+            font-size: 1.6rem; 
+            letter-spacing: -1px;
+            color: var(--primary-brown) !important; 
+        }
+
+        .nav-link { 
+            font-weight: 600; 
+            color: var(--primary-brown) !important; 
+            margin: 0 12px;
+            transition: 0.3s ease;
+        }
+
+        .nav-link:hover { color: var(--secondary-brown) !important; }
+
+
+        .btn-cart-nav {
+            background: var(--primary-brown);
+            color: white !important;
+            padding: 10px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+        }
+
+        .btn-cart-nav:hover { 
+            background: var(--secondary-brown);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(78, 52, 46, 0.2);
+        }
+
+
+        .hero-section {
+            padding: 100px 0 60px;
+            background: radial-gradient(circle at top right, #fff, transparent);
+        }
+
+
+        .product-card { 
+            border: none; 
+            border-radius: 25px; 
+            transition: all 0.4s ease; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+            background: white;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .product-card:hover { 
+            transform: translateY(-12px); 
+            box-shadow: 0 20px 40px rgba(78, 52, 46, 0.1); 
+        }
+
+        .img-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image {
+            height: 320px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+
+        .btn-buy-now { 
+            background-color: var(--primary-brown); 
+            color: white; 
+            border-radius: 15px; 
+            padding: 12px;
+            border: none;
+            width: 100%;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-buy-now:hover { 
+            background-color: var(--secondary-brown); 
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+
+        .features-box {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            margin-top: 80px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.02);
+        }
+
+
+        .fly-item {
+            position: fixed;
+            z-index: 9999;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: all 0.8s cubic-bezier(0.1, 0.5, 0.1, 1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border: 2px solid white;
+        }
+
+        @keyframes shake {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2) rotate(5deg); }
+            100% { transform: scale(1); }
+        }
+        .shake { animation: shake 0.4s ease-in-out; }
+
+
+        footer {
+            background-color: var(--primary-brown);
+            color: var(--soft-bg);
+            padding: 80px 0 40px;
+            margin-top: 100px;
+            border-radius: 50px 50px 0 0;
+        }
+
+        .footer-logo { font-weight: 800; font-size: 1.5rem; margin-bottom: 20px; display: block; }
+        .footer-link { color: rgba(252, 249, 247, 0.7); text-decoration: none; transition: 0.3s; }
+        .footer-link:hover { color: #fff; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">☘️ AROMA HOME</a>
+        
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item"><a class="nav-link" href="/">Collection</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Story</a></li>
+                
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="/profile">Account ({{ current_user.username }})</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                {% endif %}
+                
+                <li class="nav-item ms-lg-4">
+                    <a class="btn-cart-nav" href="/cart" id="main-cart">
+                        Cart <span class="ms-1">🛒</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+    
+    <header class="hero-section text-center">
+        <h1 class="display-2 fw-bold mb-3">Irish Artisanal Candles</h1>
+        <p class="lead text-muted mb-5 mx-auto" style="max-width: 600px;">
+            100% natural soy wax, hand-poured in the heart of Dublin. Bring the tranquility of the Irish coast to your home.
+        </p>
+    </header>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+        {% for product in products %}
+        <div class="col">
+            <article class="product-card p-3">
+                <div class="img-container">
+                    <img src="{{ url_for('static', filename='uploads/' + product.image_file) }}" 
+                         class="product-image rounded-4" 
+                         alt="{{ product.name }}">
+                </div>
+                <div class="card-body text-center pt-4">
+                    <h5 class="fw-bold mb-2">{{ product.name }}</h5>
+                    <p class="text-muted small mb-3">Premium Essential Oils • 40h Burn Time</p>
+                    <h4 class="fw-bold mb-4">€{{ product.price }}</h4>
+                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-buy-now">
+                        Add to Cart
+                    </a>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+
+    <section class="features-box">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="fs-1 mb-2">🌿</div>
+                <h6 class="fw-bold">100% Natural Wax</h6>
+                <p class="small text-muted mb-0">No paraffin, no toxins, just pure soy.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="fs-1 mb-2">🇮🇪</div>
+                <h6 class="fw-bold">Handmade in Dublin</h6>
+                <p class="small text-muted mb-0">Supporting local Irish craftmanship.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="fs-1 mb-2">📦</div>
+                <h6 class="fw-bold">Plastic Free</h6>
+                <p class="small text-muted mb-0">Fully recyclable and eco-friendly packaging.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-5">
+                <span class="footer-logo">☘️ AROMA HOME</span>
+                <p class="opacity-75 pe-lg-5">
+                    We believe in slow living and high-quality scents. Every candle tells a story of the Irish landscape, from the Atlantic mist to the blooming heather of Wicklow.
+                </p>
+            </div>
+            <div class="col-6 col-lg-3 ms-auto">
+                <h6 class="fw-bold mb-4 text-uppercase">Navigation</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="/" class="footer-link">Shop Collection</a></li>
+                    <li class="mb-2"><a href="/cart" class="footer-link">View Cart</a></li>
+                    <li class="mb-2"><a href="/profile" class="footer-link">My Account</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-3">
+                <h6 class="fw-bold mb-4 text-uppercase">Contact</h6>
+                <p class="small opacity-75 mb-1">📍 Grafton Street, Dublin 2</p>
+                <p class="small opacity-75 mb-1">📧 hello@aromahome.ie</p>
+                <p class="small opacity-75">📞 +353 1 234 5678</p>
+            </div>
+        </div>
+        <hr class="my-5 opacity-25">
+        <div class="text-center small opacity-50">
+            &copy; 2026 Aroma Home Dublin. Project for College Submission.
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+document.querySelectorAll('.btn-buy-now').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault(); 
+        const targetUrl = this.href;
+
+        const card = this.closest('.product-card');
+        const img = card.querySelector('.product-image');
+        const cart = document.querySelector('#main-cart');
+
+
+        const flyImg = img.cloneNode();
+        flyImg.classList.add('fly-item');
+        
+
+        const imgRect = img.getBoundingClientRect();
+        const cartRect = cart.getBoundingClientRect();
+
+
+        flyImg.style.top = imgRect.top + 'px';
+        flyImg.style.left = imgRect.left + 'px';
+        flyImg.style.width = imgRect.width + 'px';
+        flyImg.style.height = imgRect.height + 'px';
+
+        document.body.appendChild(flyImg);
+
+
+        requestAnimationFrame(() => {
+            flyImg.style.top = cartRect.top + 'px';
+            flyImg.style.left = cartRect.left + 'px';
+            flyImg.style.width = '30px';
+            flyImg.style.height = '30px';
+            flyImg.style.opacity = '0.2';
+            flyImg.style.transform = 'rotate(360deg)';
+        });
+
+
+        setTimeout(() => {
+            flyImg.remove();
+            cart.classList.add('shake');
+            
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 350);
+        }, 850);
+    });
+});
+</script>
+
+</body>
+</html>

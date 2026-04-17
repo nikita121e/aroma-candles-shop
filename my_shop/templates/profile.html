@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile — Aroma Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #fcf9f7; color: #4e342e; }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.7) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+        }
+
+        .navbar-brand { font-weight: 800; color: #4e342e !important; }
+        .nav-link { font-weight: 500; color: #4e342e !important; }
+
+        .profile-container {
+            margin-top: 60px;
+            max-width: 600px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            padding: 40px;
+            text-align: center;
+            border: none;
+        }
+
+        .avatar-circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #4e342e, #8d6e63);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(78, 52, 46, 0.2);
+        }
+
+        .user-info-box {
+            background: #f8f4f1;
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8d6e63;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4e342e;
+        }
+
+        .btn-back {
+            background-color: #4e342e;
+            color: white !important;
+            border-radius: 15px;
+            padding: 12px 30px;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            margin-top: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #6d4c41;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">☘️ AROMA HOME</a>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="/">Shop</a>
+            <a class="nav-link" href="/cart">Cart 🛒</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container d-flex justify-content-center">
+    <div class="profile-container w-100">
+        <div class="profile-card">
+            <div class="avatar-circle">
+                {{ user.username[0] | upper }}
+            </div>
+            
+            <h2 class="fw-bold mb-1">{{ user.username }}</h2>
+            <p class="text-muted">Premium Member since 2026</p>
+
+            <div class="user-info-box">
+                <div class="mb-3">
+                    <span class="info-label">Username</span>
+                    <span class="info-value">{{ user.username }}</span>
+                </div>
+                <div class="mb-0">
+                    <span class="info-label">Location</span>
+                    <span class="info-value">Ireland 🇮🇪</span>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-6">
+                    <div class="p-3 border rounded-4">
+                        <h4 class="fw-bold mb-0"></h4>
+                        <small class="text-muted">Orders</small>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border rounded-4">
+                        <h4 class="fw-bold mb-0"></h4>
+                        <small class="text-muted">Reviews</small>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/" class="btn btn-back">Return to Shopping</a>
+            
+            <a href="/logout" class="text-danger d-block mt-4 small text-decoration-none fw-bold">
+                Log Out
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
